@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HlslShaderCompiler.Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,16 @@ namespace HlslShaderCompiler
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new CompilerForm());
+            }
+            else
+            {
+                CommandLineConfiguration _commandLine = new CommandLineConfiguration(args);
+
+                _commandLine.CreateConfiguration();
+
+                ConfigParserXML _config = new ConfigParserXML();
+
+                _config.ReadStatsConfigurationFile(_commandLine[Parameters.ConfigFile]);
             }
         }
     }

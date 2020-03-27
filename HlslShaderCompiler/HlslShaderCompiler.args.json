@@ -4,7 +4,7 @@
   "Items": [
     {
       "Id": "b35180a6-e6f4-4a5e-ad68-772a0b1fccc0",
-      "Command": "-test"
+      "Command": "-targetdir $(TargetDir) -projectdir $(ProjectDir) -ConfigFile  $(ProjectDir)TestConfig/Config.xml "
     }
   ]
 }

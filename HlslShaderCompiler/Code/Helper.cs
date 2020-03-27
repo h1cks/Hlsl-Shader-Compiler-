@@ -618,14 +618,19 @@ where T : System.IComparable<T>
 
         static public Stream GetFileStream(string filename, string filePath, FileMode fileMode = FileMode.Open)
         {
+            return GetFileStream(filePath + filename, fileMode);
+        }
+
+        static public Stream GetFileStream(string filename, FileMode fileMode = FileMode.Open)
+        {
             Stream data;
 
-            if (!File.Exists(filePath + filename))
-                Console.WriteLine("File does not exit: " + filePath + filename);
+            if (!File.Exists(filename))
+                Console.WriteLine("File does not exit: " +  filename);
 
 #if !WINDOWS_UWP
             //m_fileStream = new SoundStream(File.OpenRead(filePath + filename));
-            data = new FileStream(filePath + filename, fileMode);
+            data = new FileStream(filename, fileMode);
 #else
             data = GetFileStreamUWP(filename, filePath);
 #endif

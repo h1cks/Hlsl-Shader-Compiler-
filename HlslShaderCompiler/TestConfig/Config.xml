@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CompilerConfiguration>
+  <ShaderFile filename="/TestConfig/test.hlsl">
+    <Debugoptions></Debugoptions>
+    <ReleaseOptions></ReleaseOptions>
+  </ShaderFile>
+</CompilerConfiguration>
+
