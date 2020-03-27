@@ -137,6 +137,7 @@
     <Content Include="GpuCode\Commondefinitions\WaterTesselationHeader.hlsl" />
     <Content Include="GpuCode\DecalShadervs.hlsl" />
     <Content Include="GpuCode\Config.xml" />
+    <Content Include="GpuCode\Terrainvs.hlsl" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

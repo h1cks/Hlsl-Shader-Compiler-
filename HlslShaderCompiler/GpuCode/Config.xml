@@ -12,5 +12,9 @@
     <ShaderModel>vs_5_0</ShaderModel>
     <EntryPoint>VSMain</EntryPoint>
   </ShaderFile>
+  <ShaderFile filename="GpuCode\Terrainvs.hlsl">
+    <ShaderModel>vs_5_0</ShaderModel>
+    <EntryPoint>VSMain</EntryPoint>
+  </ShaderFile>
 </CompilerConfiguration>
 
