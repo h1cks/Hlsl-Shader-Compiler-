@@ -80,7 +80,8 @@
   <ItemGroup>
     <Compile Include="Code\CommandLineConfiguration.cs" />
     <Compile Include="Code\ConfigParserXML.cs" />
-    <Compile Include="Code\ShadersCompiler.cs" />
+    <Compile Include="Code\HlslConfiguration.cs" />
+    <Compile Include="Code\HlslFileConfiguration.cs" />
     <Compile Include="CompilerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,7 +99,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Code\ShaderBase.cs" />
+    <Compile Include="Code\ShaderCompiler.cs" />
     <EmbeddedResource Include="CompilerForm.resx">
       <DependentUpon>CompilerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,12 +133,9 @@
     <Content Include="GpuCode\Commondefinitions\BufferDefinitions.hlsl" />
     <Content Include="GpuCode\Commondefinitions\Common.hlsl" />
     <Content Include="GpuCode\Commondefinitions\CommonConstants.hlsl" />
-    <Content Include="GpuCode\Commondefinitions\CommonDecal.hlsl" />
     <Content Include="GpuCode\Commondefinitions\CommonShadow.hlsl" />
-    <Content Include="GpuCode\Commondefinitions\Gerstner.hlsl" />
-    <Content Include="GpuCode\Commondefinitions\LoadTexture.hlsl" />
     <Content Include="GpuCode\Commondefinitions\WaterTesselationHeader.hlsl" />
-    <Content Include="GpuCode\Shaderps.hlsl" />
+    <Content Include="GpuCode\DecalShadervs.hlsl" />
     <Content Include="TestConfig\Config.xml" />
   </ItemGroup>
   <ItemGroup />

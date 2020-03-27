@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HlslShaderCompiler.Code
 {
-    public enum Parameters { TargetDir, ProjectDir, ConfigFile, None }
+    public enum Parameters { Mode, TargetDir, ProjectDir, ConfigFile, None }
     public class CommandLineConfiguration
     {
         protected Dictionary<Parameters, string> _parserArguments;
@@ -47,7 +47,7 @@ namespace HlslShaderCompiler.Code
 
                     if (arg_.ToLower() == "-" + _params.ToString().ToLower())
                     {
-                        _parserArguments.Add(_params, _args[i + 1]);
+                        _parserArguments.Add(_params, _args[i + 1].ToLower());
                         break;
                     }
                 }

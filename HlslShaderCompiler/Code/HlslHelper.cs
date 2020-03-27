@@ -13,23 +13,26 @@ namespace Insane3D.HelperFunctions
 {
     public class IncludeFX : Include
     {
+        string _includeDirectory = "";
 
-        const string includeDirectory = "GPUCode\\";
-
-
-        IDisposable m_shadow;
+        protected IDisposable _shadow;
 
         public IDisposable Shadow
         {
             get
             {
-                return m_shadow;
+                return _shadow;
             }
 
             set
             {
-                m_shadow = value;
+                _shadow = value;
             }
+        }
+
+        public IncludeFX(string directory)
+        {
+            _includeDirectory = directory;
         }
 
         public void Close(Stream stream)
@@ -48,14 +51,14 @@ namespace Insane3D.HelperFunctions
         {
             try
             {
-                if (File.Exists(includeDirectory + fileName))
+                if (File.Exists(_includeDirectory + fileName))
                 {
 #if WINDOWS_UWP
                     DataStream a = GetFileStreamInclude(fileName);
 #else
-                    FileStream a = new FileStream(includeDirectory + fileName, FileMode.Open);
+                    FileStream stream_ = new FileStream(_includeDirectory + fileName, FileMode.Open);
 #endif
-                    return a;
+                    return stream_;
                 }
             }
             catch (Exception ex)
@@ -65,7 +68,7 @@ namespace Insane3D.HelperFunctions
 
             }
 
-            throw new Exception("No file found: " + includeDirectory + fileName);
+            throw new Exception("No file found: " + _includeDirectory + fileName);
 
         }
 

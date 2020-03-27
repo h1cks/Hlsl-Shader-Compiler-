@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CompilerConfiguration>
-  <ShaderFile filename="/TestConfig/test.hlsl">
-    <Debugoptions></Debugoptions>
-    <ReleaseOptions></ReleaseOptions>
+  <Global>
+    <DebugOptions>
+      <ShaderFlag>Debug</ShaderFlag>      
+    </DebugOptions>
+    <ReleaseOptions>
+      <ShaderFlag>OptimizationLevel3</ShaderFlag>      
+    </ReleaseOptions>
+  </Global>
+  <ShaderFile filename="GpuCode\ShaderVS.hlsl">
+    <ShaderModel>vs_5_0</ShaderModel>
+    <EntryPoint>VSMain</EntryPoint>
   </ShaderFile>
 </CompilerConfiguration>
 

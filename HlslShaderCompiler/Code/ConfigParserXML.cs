@@ -1,5 +1,6 @@
 ﻿using Insane3D;
 using Insane3D.HelperFunctions;
+using SharpDX.D3DCompiler;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,30 +8,44 @@ using System.Xml;
 
 namespace HlslShaderCompiler.Code
 {
-    public class HlslConfiguration
-    { 
-        
-    }
+
+
+
+ 
     public class ConfigParserXML
     {
         //============================================================================================================================//
 
-        public void ReadStatsConfigurationFile(string configurationfilename)
+        public void ReadConfigurationFile(string configurationfilename, HlslConfiguration configuration)
         {
             try
             {
                 if (File.Exists(configurationfilename))
                 {
-                    using (Stream stream = Helper.GetFileStream(configurationfilename))
+                    using (Stream stream_ = Helper.GetFileStream(configurationfilename))
                     {
-                        using (XmlReader reader = XmlReader.Create(stream))
+                        using (XmlReader reader_ = XmlReader.Create(stream_))
                         {
-                            reader.Read();
+                            
+                            reader_.ReadToFollowing("CompilerConfiguration");
 
-                            if (reader.IsStartElement("CompilerConfiguration"))
+                            if (reader_.IsStartElement("CompilerConfiguration"))
                             {
+                                reader_.ReadToFollowing("Global");
 
+                                if (reader_.IsStartElement("Global"))
+                                {
+                                    ReadGlobal(reader_, configuration);
+                                }
+
+                                reader_.Read();
+
+                                reader_.ReadEndElement();
                             }
+
+                            reader_.ReadToFollowing("ShaderFile");
+
+                            configuration.ReadFileList(reader_);
                         }
                     }
                 }
@@ -40,6 +55,53 @@ namespace HlslShaderCompiler.Code
                 ErrorHandler.DoErrorHandling(ex, ErrorHandler.GetCurrentMethod(ex));
             }
 
+        }
+
+        //============================================================================================================================//
+
+        void ReadGlobal(XmlReader reader, HlslConfiguration configuration)
+        {
+            reader.ReadToFollowing("DebugOptions");
+
+            if (reader.IsStartElement("DebugOptions"))
+            {
+                reader.Read();
+                reader.Read();
+
+                while (reader.Name == "ShaderFlag")
+                {
+                    string flag_ = reader.ReadElementString("ShaderFlag");
+
+                    if (Enum.TryParse(flag_, out ShaderFlags value_))
+                    {
+                        configuration.AddGlobalDebugFlag(value_);
+                    }
+
+                    reader.Read();
+                }
+
+                reader.ReadEndElement();
+            }
+
+            if (reader.IsStartElement("ReleaseOptions"))
+            {
+                reader.Read();
+                reader.Read();
+
+                while (reader.Name == "ShaderFlag")
+                {
+                    string flag_ = reader.ReadElementString("ShaderFlag");
+
+                    if (Enum.TryParse(flag_, out ShaderFlags value_))
+                    {
+                        configuration.AddGlobalDebugFlag(value_);
+                    }
+
+                    reader.Read();
+                }
+
+                reader.ReadEndElement();
+            }
         }
     }
 }
