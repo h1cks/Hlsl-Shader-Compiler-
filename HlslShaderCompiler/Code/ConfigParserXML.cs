@@ -94,7 +94,7 @@ namespace HlslShaderCompiler.Code
 
                     if (Enum.TryParse(flag_, out ShaderFlags value_))
                     {
-                        configuration.AddGlobalDebugFlag(value_);
+                        configuration.AddGlobalReleaseFlag(value_);
                     }
 
                     reader.Read();

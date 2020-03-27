@@ -24,6 +24,8 @@ namespace Insane3D
 
                 IncludeFX _include = new IncludeFX(baseSourceDirectory + _path + "\\");
 
+                Console.WriteLine("Compiler Flags used: " + global_.GetShaderFlagsAsString().ToString());
+
                 if (File.Exists(baseSourceDirectory + file.FileNameRelative))
                 {
                     D3DCompiler.CompilationResult errors_ = D3DCompiler.ShaderBytecode.CompileFromFile(baseSourceDirectory + file.FileNameRelative, 
@@ -42,7 +44,7 @@ namespace Insane3D
 
                         string path_ = outputDirectory + _path + "\\";
 
-                        file.OutputName  = path_ + fileName_ + ".obj";
+                        file.OutputName  = path_ + fileName_ + ".cso";
 
                         System.IO.Directory.CreateDirectory(path_ + "\\");
 

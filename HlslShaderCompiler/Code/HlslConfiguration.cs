@@ -58,8 +58,35 @@ namespace HlslShaderCompiler.Code
             return flags_;
         }
 
+        string GetFlagsAsstring(List<ShaderFlags> flagsList)
+        {
+            string flags_ = "";
+
+            for (int i = 0; i < flagsList.Count; i++)
+            {
+                flags_ += " " + flagsList[i].ToString();
+            }
+
+            return flags_;
+        }
+
+
+        public string GetShaderFlagsAsString()
+        {
+            if (_debugMode)
+            {
+                return GetFlagsAsstring(_debugShaderFlags);
+            }
+            else
+            {
+                return GetFlagsAsstring(_releaseShaderFlags);
+            }
+
+        }
+
         public ShaderFlags GetShaderFlags()
         {
+
             if (_debugMode)
             {
                 return GetFlags(_debugShaderFlags);

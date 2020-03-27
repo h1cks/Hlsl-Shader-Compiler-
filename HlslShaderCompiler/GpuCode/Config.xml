@@ -8,7 +8,7 @@
       <ShaderFlag>OptimizationLevel3</ShaderFlag>      
     </ReleaseOptions>
   </Global>
-  <ShaderFile filename="GpuCode\ShaderVS.hlsl">
+  <ShaderFile filename="GpuCode\DecalShadervs.hlsl">
     <ShaderModel>vs_5_0</ShaderModel>
     <EntryPoint>VSMain</EntryPoint>
   </ShaderFile>
