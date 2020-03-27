@@ -1,0 +1,10 @@
+{
+  "FileVersion": 2,
+  "Id": "65a7bfb9-6274-4a1b-9f18-d8e53eb10168",
+  "Items": [
+    {
+      "Id": "b35180a6-e6f4-4a5e-ad68-772a0b1fccc0",
+      "Command": "-test"
+    }
+  ]
+}
