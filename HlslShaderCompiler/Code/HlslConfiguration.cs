@@ -60,11 +60,16 @@ namespace HlslShaderCompiler.Code
 
         string GetFlagsAsstring(List<ShaderFlags> flagsList)
         {
-            string flags_ = "";
+            string flags_ = "No Flags Set";
 
-            for (int i = 0; i < flagsList.Count; i++)
+            if (flagsList.Count > 0 )
             {
-                flags_ += " " + flagsList[i].ToString();
+                flags_ = flagsList[0].ToString();
+
+                for (int i_ = 1; i_ < flagsList.Count; i_++)
+                {
+                    flags_ += ", " + flagsList[i_]. ToString();
+                }
             }
 
             return flags_;

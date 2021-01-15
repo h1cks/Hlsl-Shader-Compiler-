@@ -24,10 +24,15 @@ cbuffer perFrameBuffer : register(b0)
 
     float3 cameraPosition;
     float padding;
-
+    
+    float3 cameraDirection;
+    float padding3;
+    
     float3 shadowCameraPosition;
     float padding2;
 }
+
+       //========================================================================================================================
 
 cbuffer PerFrameLightBuffer : register(b2)
 {
@@ -38,12 +43,14 @@ cbuffer PerFrameLightBuffer : register(b2)
     float textureOffset;
     float SeaLevel;
     float SeaFadeLevel;
-    float SpecularLocation;
+    float TextureHighlight;
 }
+
+//========================================================================================================================
 
 const static int MAXMOTION = 13;
 
-cbuffer MotionBuffer: register(b5)
+cbuffer MotionBuffer : register(b5)
 {
     float4 WindDirection;
 
@@ -54,48 +61,10 @@ cbuffer MotionBuffer: register(b5)
 }
 
 
-const static int MAXTEXTUREMATERIALS = 64;
-                                                                                   
-cbuffer MaterialBuffer : register(b4)
-{
-	struct MaterialType {
-		float1 specularValue;
-		float1 padding12;
-		float1 TextureIndex;
-		float1 padding14;
-		// pad 12 bytes
-	} Material[MAXTEXTUREMATERIALS]; //size is 16 bytes
-}
-
-struct WaveData {
-	float1 Length;
-	float1 Speed;    // starts a new vector
-	float1 Amplitude;    // starts a new vector
-	float1 Steep;    // starts a new vector
-};
-
-//everything aligns to 16 byte boundaries
-
-cbuffer WaterBuffer : register(b3)
-{
-    float3 OffsetVector;
-    float Time;
-    float Oscellator;
-    float SteepnessMult;
-    float AmplitudeMult;
-    float GeometryMult; // 32
-    
-    // 304 - 32 = 272 / 3272/3
-
-    WaveData Wave[8];
-
-	float2 WaveDirections[8]; //64
-
-	//waveData waves[8];
-
-}
 
 cbuffer DecalModifiers : register(b7)
 {
 
 }
+
+

@@ -24,6 +24,8 @@ namespace Insane3D
 
                 IncludeFX _include = new IncludeFX(baseSourceDirectory + _path + "\\");
 
+                Console.WriteLine("Compiling file: " + Path.GetFileName(file.FileNameRelative));
+
                 Console.WriteLine("Compiler Flags used: " + global_.GetShaderFlagsAsString().ToString());
 
                 if (File.Exists(baseSourceDirectory + file.FileNameRelative))
@@ -62,8 +64,10 @@ namespace Insane3D
                     return true;
                 }
             }
-            catch 
+            catch (Exception ex_)
             {
+                Console.WriteLine("Failed to compile file: " + ex_.Message);
+
                 return false;
             }
 
