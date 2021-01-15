@@ -44,7 +44,9 @@ namespace Insane3D
                     {
                         string fileName_ = Path.GetFileNameWithoutExtension(Path.GetFileName(file.FileNameRelative));
 
-                        string path_ = outputDirectory + _path + "\\";
+                        string path_ = Path.GetFullPath(outputDirectory) ;
+
+                        
 
                         file.OutputName  = path_ + fileName_ + ".cso";
 
@@ -62,6 +64,11 @@ namespace Insane3D
                     }
 
                     return true;
+                }
+                else
+                {
+                    Console.WriteLine("File not found: " + baseSourceDirectory + file.FileNameRelative);
+
                 }
             }
             catch (Exception ex_)

@@ -41,7 +41,7 @@ namespace HlslShaderCompiler.Code
 
             foreach (Parameters _params in Enum.GetValues(typeof(Parameters)))
             {
-                for (int i = 1; i < _args.Length - 1; i += 2)
+                for (int i = 0; i < _args.Length - 1; i += 2)
                 {
                     string arg_ = _args[i].ToLower();
 
