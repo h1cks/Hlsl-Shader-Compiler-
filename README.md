@@ -3,7 +3,9 @@ Tool for compiling HLSL Code.  WIP
 
 Command line
 
+```
 -Mode release -targetdir D:\Development\Strafe\Strafe\bin\Release\net46\GPUCode\  -projectdir D:\Development\Strafe\Strafe\ -configfile  D:\Development\Strafe\Strafe\GPUCode\Config.xml
+```
 
 mode release/debug - applies global flags based upon XML config
 
