@@ -9,6 +9,8 @@ mode release/debug - applies global flags based upon XML config
 
 Example Config.XML
 
+
+```
 <?xml version="1.0" encoding="utf-8" ?>
 <CompilerConfiguration>
   <Global>
@@ -64,3 +66,6 @@ Example Config.XML
     <EntryPoint>HSMain</EntryPoint>
   </ShaderFile>
 </CompilerConfiguration>
+```
+
+
