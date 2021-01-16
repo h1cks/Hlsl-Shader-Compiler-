@@ -16,8 +16,6 @@ namespace HlslShaderCompiler
         [STAThread]
         static void Main(string[] args)
         {
-       //     string[] args = Environment.GetCommandLineArgs();
-
             if (args.Length < 2)
             {
                 Application.EnableVisualStyles();
@@ -26,30 +24,61 @@ namespace HlslShaderCompiler
             }
             else
             {
-                CommandLineConfiguration _commandLine = new CommandLineConfiguration(args);
-                ConfigParserXML _xmlconfigfile = new ConfigParserXML();
-                HlslConfiguration _config = new HlslConfiguration();
+                Console.WriteLine("================================ Reading Config ================================  ");
 
-                _commandLine.CreateConfiguration();
+                CommandLineConfiguration commandLine_ = new CommandLineConfiguration(args);
+                ConfigParserXML xmlconfigfile_ = new ConfigParserXML();
+                HlslConfiguration config_ = new HlslConfiguration();
 
-                _config.SetDebugMode(_commandLine[Parameters.Mode].ToLower() == "Debug".ToLower());
+                commandLine_.CreateConfiguration();
 
-                _xmlconfigfile.ReadConfigurationFile(_commandLine[Parameters.ConfigFile], _config);
+                config_.SetDebugMode(commandLine_[Parameters.Mode].ToLower() == "Debug".ToLower());
 
-                for (int i = 0; i < _config.FileConfiguration.Count; i++ )
+                xmlconfigfile_.ReadConfigurationFile(commandLine_[Parameters.ConfigFile], config_);
+
+                int successCount_ = 0;
+                int failCount_ = 0;
+
+                List<string> failList_ = new List<string>();
+
+                Console.WriteLine("================================  Compile Started ================================  ");
+
+                for (int i = 0; i < config_.FileConfiguration.Count; i++ )
                 {
-                    Console.WriteLine("Compiling:" + _commandLine[Parameters.ProjectDir] + _config.FileConfiguration[i].FileNameRelative);
+                    Console.WriteLine("Compiling: " + commandLine_[Parameters.ProjectDir] + config_.FileConfiguration[i].FileNameRelative);
 
-                    if (ShaderCompiler.CompileShader(_commandLine[Parameters.ProjectDir], _commandLine[Parameters.TargetDir], "GPUCode\\", _config, _config.FileConfiguration[i]))
+                    if (ShaderCompiler.CompileShader(commandLine_[Parameters.ProjectDir], commandLine_[Parameters.TargetDir], "GPUCode\\", config_, config_.FileConfiguration[i]))
                     {
-
-                        Console.WriteLine("Compiled to: " + _config.FileConfiguration[i].OutputName);
+                        successCount_++;
+                        Console.WriteLine("Compiled to: " + config_.FileConfiguration[i].OutputName);
                     }
                     else
                     {
-                        Console.WriteLine("Failed:" + _config.FileConfiguration[i].FileNameRelative);
+                        failCount_++;
+                        Console.WriteLine("Failed:" + config_.FileConfiguration[i].FileNameRelative);
+
+                        failList_.Add(config_.FileConfiguration[i].FileNameRelative);
                     }
+
+                    if (i -1 < config_.FileConfiguration.Count)
+                    {
+                        Console.WriteLine("-------------------------------------------------------------------------------");
+                    }
+                }                
+
+                Console.WriteLine("================================  Compile Completed ================================  ");
+
+                Console.WriteLine("Total Files to compile: " + config_.FileConfiguration.Count);
+                Console.WriteLine("Total Files Compiled Successfully: " + successCount_);
+                Console.WriteLine("Total Files Failed to Compile/Load: " + failCount_);
+
+                for (int i = 0; i < failList_.Count; i++)
+                {
+                    Console.WriteLine("Failed: " + failList_[i]);
                 }
+
+
+                Console.WriteLine("==================================================================================== ");
             }
         }
     }

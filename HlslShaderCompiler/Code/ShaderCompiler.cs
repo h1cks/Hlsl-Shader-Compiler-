@@ -22,9 +22,7 @@ namespace Insane3D
             {
                 string _path = Path.GetDirectoryName(file.FileNameRelative);
 
-                IncludeFX _include = new IncludeFX(baseSourceDirectory + _path + "\\");
-
-                Console.WriteLine("Compiling file: " + Path.GetFileName(file.FileNameRelative));
+                IncludeFX include_ = new IncludeFX(baseSourceDirectory + _path + "\\");
 
                 Console.WriteLine("Compiler Flags used: " + global_.GetShaderFlagsAsString().ToString());
 
@@ -36,7 +34,7 @@ namespace Insane3D
                         global_.GetShaderFlags(), 
                         D3DCompiler.EffectFlags.None, 
                         null, 
-                        _include);
+                        include_);
 
                     D3DCompiler.ShaderBytecode shaderByteCode = errors_.Bytecode;
 
@@ -46,8 +44,6 @@ namespace Insane3D
 
                         string path_ = Path.GetFullPath(outputDirectory) ;
 
-                        
-
                         file.OutputName  = path_ + fileName_ + ".cso";
 
                         System.IO.Directory.CreateDirectory(path_ + "\\");
@@ -55,8 +51,6 @@ namespace Insane3D
                         FileStream write_ = new FileStream(file.OutputName, FileMode.Create, FileAccess.Write);
 
                         shaderByteCode.Save(write_);
-
-                        
                     }
                     else
                     {
